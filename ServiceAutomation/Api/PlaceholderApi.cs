@@ -15,5 +15,14 @@ namespace Common.Api
                 Method = Method.GET
             };
         }
+
+        public ServiceRequest GetPlaceholdersRequestById(int placeholderId)
+        {
+            return new ServiceRequest
+            {
+                Url = $"/{Service}/posts/{placeholderId}",
+                Method = Method.GET
+            };
+        }
     }
 }

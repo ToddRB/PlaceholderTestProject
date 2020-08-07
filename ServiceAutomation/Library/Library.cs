@@ -8,10 +8,10 @@ namespace Common.Library
     {
         private static readonly PlaceholderService service = new PlaceholderService();
 
-        public static List<PlaceholderPost> GetAllPlaceholders()
+        public static Response GetAllPlaceholders()
         {
             var getSystemMessageRequest = service.GetAllPlaceholdersRequest();
-            return null; // ServiceRunner.ServiceRunTests(getSystemMessageRequest);
+            return RestServiceRunner.SendRequest(getSystemMessageRequest);
         }
     }
 }

@@ -19,7 +19,9 @@ namespace Tests.Scripts.SmokeTests
 
         [ClassInitialize]
         public static void TestClassInitialize(TestContext context)
-        { }
+        {
+            testContext = context;
+        }
 
         [TestCategory("Gets")]
         [Priority(1)]
@@ -27,7 +29,7 @@ namespace Tests.Scripts.SmokeTests
         [TestMethod]
         public void GetAllPlaceholderResourcesTest()
         {
-            //var jsonResponse = Library.GetJsonResponseTest();
+            var response = Library.GetAllPlaceholders();
             //Assert.IsTrue(jsonResponse.TestResult.IsPassed, "Verify endpoint responsive");
             Assert.IsTrue(true, "I'm true!");
         }

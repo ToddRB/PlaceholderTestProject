@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/packages
+/ServiceAutomation/bin/Debug
+/ServiceAutomation/obj/Debug
+/ServiceAutomationTests/bin/Debug
+/ServiceAutomationTests/obj/Debug
+/ServiceAutomationTests/Reporting
+/ServiceAutomation/obj/Release
+/ServiceAutomationTests/obj/Release
+/ServiceAutomation/obj
+/ServiceAutomationTests/obj

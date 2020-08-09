@@ -11,7 +11,7 @@ namespace Common.Api
         {
             return new ServiceRequest
             {
-                Url = $"/{Service}/posts/",
+                Url = $"{Service}/posts/",
                 Method = Method.GET
             };
         }
@@ -20,7 +20,7 @@ namespace Common.Api
         {
             return new ServiceRequest
             {
-                Url = $"/{Service}/posts/{placeholderId}",
+                Url = $"{Service}/posts/{placeholderId}",
                 Method = Method.GET
             };
         }

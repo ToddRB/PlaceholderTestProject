@@ -8,10 +8,20 @@ namespace Common.Library
     {
         private static readonly PlaceholderService service = new PlaceholderService();
 
-        public static Response GetAllPlaceholders()
+        public static PlaceholderPost GetAllPlaceholders()
         {
-            var getSystemMessageRequest = service.GetAllPlaceholdersRequest();
-            return RestServiceRunner.SendRequest(getSystemMessageRequest);
+            var postMessageRequest = service.GetAllPlaceholdersRequest();
+            var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            return jsonResponse;
+        }
+
+        public static PlaceholderPost GetPlaceholderPostById(int id)
+        {
+            var postMessageRequest = service.GetPlaceholdersRequestById(id);
+            var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            return jsonResponse;
         }
     }
 }

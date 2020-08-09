@@ -10,7 +10,7 @@ namespace Common.Library
         {
             var client = GetRestClient(serviceRequest);
             var request = SetRequestHeaders(serviceRequest);
-            var response = client.Execute(request);
+            var response = client.Execute<PlaceholderPost>(request);
 
             var sendRequest = new Response();
             {
@@ -38,7 +38,7 @@ namespace Common.Library
         {
             return new RestClient
             {
-                BaseUrl = new Uri(serviceRequest?.Url)
+                BaseUrl = new Uri(serviceRequest.Url)
             };
         }
     }

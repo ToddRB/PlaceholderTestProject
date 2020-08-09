@@ -10,11 +10,13 @@ namespace Common.Library
         {
             var client = GetRestClient(serviceRequest);
             var request = SetRequestHeaders(serviceRequest);
-            var response = client.Execute<PlaceholderPost>(request);
+            var response = client.Execute(request);
+            var restResponse = new RestResponse();
 
             var sendRequest = new Response();
             {
                 sendRequest.RestResponse = response;
+                sendRequest.StatusCode = response.StatusCode;
             }
 
             return sendRequest;
@@ -22,7 +24,11 @@ namespace Common.Library
 
         public static RestRequest SetRequestHeaders(ServiceRequest serviceRequest)
         {
-            var request = new RestRequest(serviceRequest.Url, serviceRequest.Method) { Timeout = 900000 };
+            var request = new RestRequest(serviceRequest.Url, serviceRequest.Method)
+            {
+                Timeout = 10000
+            };
+
             foreach (var header in serviceRequest.RequestHeaders)
             {
                 request.AddHeader(header.Name, header.Value);

@@ -4,6 +4,7 @@
 	<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="JsonDataFiles\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

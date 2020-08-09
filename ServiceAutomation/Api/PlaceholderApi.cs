@@ -24,5 +24,34 @@ namespace Common.Api
                 Method = Method.GET
             };
         }
+
+        public ServiceRequest PostPlaceholderById(PlaceholderPost post)
+        {
+            return new ServiceRequest
+            {
+                Url = $"{Service}/posts",
+                Method = Method.POST,
+                Json = post.ToString()
+            };
+        }
+
+        public ServiceRequest PutPlaceholderById(PlaceholderPost post, int placeholderId)
+        {
+            return new ServiceRequest
+            {
+                Url = $"{Service}/posts/{placeholderId}",
+                Method = Method.PUT,
+                Json = post.ToString()
+            };
+        }
+
+        public ServiceRequest DeletePlaceholderById(int placeholderId)
+        {
+            return new ServiceRequest
+            {
+                Url = $"{Service}/posts/{placeholderId}",
+                Method = Method.DELETE
+            };
+        }
     }
 }

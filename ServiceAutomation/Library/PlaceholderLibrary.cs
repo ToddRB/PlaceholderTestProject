@@ -1,18 +1,19 @@
 ﻿using Common.Api;
 using Common.Models;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Common.Library
 {
-    public static class Library
+    public static class PlaceholderLibrary
     {
         private static readonly PlaceholderService service = new PlaceholderService();
 
-        public static PlaceholderPost GetAllPlaceholders()
+        public static List<PlaceholderPost> GetAllPlaceholders()
         {
             var postMessageRequest = service.GetAllPlaceholdersRequest();
             var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
-            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostListAsJson(postMessageResponse);
             return jsonResponse;
         }
 

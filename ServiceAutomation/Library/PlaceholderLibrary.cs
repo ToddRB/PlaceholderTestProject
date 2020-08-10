@@ -48,6 +48,36 @@ namespace Common.Library
             return jsonResponse;
         }
 
+        public static PlaceholderPost PostInvalidPlaceholderRecord()
+        {
+            PlaceholderPost post = new PlaceholderPost();
+            {
+                post.UserId = -1;
+                post.Title = "Todds Post Title";
+                post.Body = "Todds Post Body";
+            }
+
+            var postMessageRequest = service.PostPlaceholder(post);
+            var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            return jsonResponse;
+        }
+
+        public static PlaceholderPost ThisWouldBeAFunnyBug()
+        {
+            PlaceholderPost post = new PlaceholderPost();
+            {
+                post.UserId = 999;
+                post.Title = "X Æ A-12 Musk";
+                post.Body = "X Æ A-12 Musk";
+            }
+
+            var postMessageRequest = service.PostPlaceholder(post);
+            var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            return jsonResponse;
+        }
+
         public static PlaceholderPost PutPlaceholderRecord(int placeholderId)
         {
             PlaceholderPost post = new PlaceholderPost();

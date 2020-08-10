@@ -145,5 +145,35 @@ namespace Tests.Scripts.RegressionTests
             //Either a bug or I don't understand PATCH? I have to include ID in the json or it returns 0
             Assert.IsTrue(response.Id == 1);
         }
+
+        [TestCategory("Bug?")]
+        [TestCategory("Post")]
+        [TestCategory("Negative")]
+        [Priority(3)]
+        [Description("Attempt to Post an invalid Placeholder record")]
+        [TestMethod]
+        public void PostPlaceholderNegativeTest()
+        {
+            //I thought the API would prevent negative ids but this passes so tagging it as "Bug?"
+            var response = PlaceholderLibrary.PostInvalidPlaceholderRecord();
+            Assert.IsTrue(response.Title == "Todds Post Title");
+            Assert.IsTrue(response.Body == "Todds Post Body");
+            Assert.IsTrue(response.UserId == -1);
+            Assert.IsTrue(response.Id == 101);
+        }
+
+        [TestCategory("Post")]
+        [TestCategory("Negative")]
+        [Priority(3)]
+        [Description("Attempt to Post an invalid Placeholder record")]
+        [TestMethod]
+        public void PostPlaceholderNegativeTestSecondTry()
+        {
+            var response = PlaceholderLibrary.ThisWouldBeAFunnyBug();
+            Assert.IsTrue(response.Title == "X Æ A-12 Musk");
+            Assert.IsTrue(response.Body == "X Æ A-12 Musk");
+            Assert.IsTrue(response.UserId == 999);
+            Assert.IsTrue(response.Id == 101);
+        }
     }
 }

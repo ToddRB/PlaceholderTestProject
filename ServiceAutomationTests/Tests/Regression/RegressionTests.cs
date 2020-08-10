@@ -66,18 +66,45 @@ namespace Tests.Scripts.RegressionTests
             Assert.IsTrue(response.Id == 0, "Invalid response");
         }
 
-        [TestCategory("Get")]
         [TestCategory("Fail")]
         [Priority(2)]
         [Description("Get the Placeholder by id and compare with file")]
         [TestMethod]
-        public void GetPlaceholderByIdFileCompareTest()
+        public void GetPlaceholderByIdInvalidFileCompareTest()
         {
             var response = PlaceholderLibrary.GetPlaceholderPostById(1);
-            var json = JsonReader.ReadJsonFromInputFile("1Record.json");
+            var json = JsonReader.ReadJsonFromInputFile("1InvalidRecord.json");
             var placeholderJson = DeserializeResponses.GetPlaceholderPostAsJson(json);
 
             Assert.IsTrue(response.Title == placeholderJson.Title, "I expect this to fail actually");
+        }
+
+        [TestCategory("Get")]
+        [TestCategory("Positive")]
+        [Priority(1)]
+        [Description("Get the Placeholder by id and compare with file")]
+        [TestMethod]
+        public void GetPlaceholderByIdValidFileCompareTest()
+        {
+            var response = PlaceholderLibrary.GetPlaceholderPostById(1);
+            var json = JsonReader.ReadJsonFromInputFile("1ValidRecord.json");
+            var placeholderJson = DeserializeResponses.GetPlaceholderPostAsJson(json);
+
+            Assert.IsTrue(response.Title == placeholderJson.Title, "I expect this to fail actually");
+        }
+
+        [TestCategory("Post")]
+        [TestCategory("Positive")]
+        [Priority(1)]
+        [Description("Post a new Placeholder record")]
+        [TestMethod]
+        public void PostPlaceholderTest()
+        {
+            var response = PlaceholderLibrary.PostPlaceholderRecord();
+            Assert.IsTrue(response.Title == "Todds Post Title");
+            Assert.IsTrue(response.Body == "Todds Post Body");
+            Assert.IsTrue(response.UserId == 101);
+            Assert.IsTrue(response.Id == 101);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace Common.Api
@@ -25,13 +26,13 @@ namespace Common.Api
             };
         }
 
-        public ServiceRequest PostPlaceholderById(PlaceholderPost post)
+        public ServiceRequest PostPlaceholder(PlaceholderPost post)
         {
             return new ServiceRequest
             {
                 Url = $"{Service}/posts",
                 Method = Method.POST,
-                Json = post.ToString()
+                Json = JsonConvert.SerializeObject(post)
             };
         }
 

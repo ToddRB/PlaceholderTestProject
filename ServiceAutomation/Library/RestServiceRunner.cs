@@ -8,18 +8,26 @@ namespace Common.Library
     {
         public static Response SendRequest(ServiceRequest serviceRequest)
         {
-            var client = GetRestClient(serviceRequest);
-            var request = SetRequestHeaders(serviceRequest);
-            var response = client.Execute(request);
-            var restResponse = new RestResponse();
-
-            var sendRequest = new Response();
+            try
             {
-                sendRequest.RestResponse = response;
-                sendRequest.StatusCode = response.StatusCode;
-            }
+                var client = GetRestClient(serviceRequest);
+                var request = SetRequestHeaders(serviceRequest);
+                var response = client.Execute(request);
+                var restResponse = new RestResponse();
 
-            return sendRequest;
+                var sendRequest = new Response();
+                {
+                    sendRequest.RestResponse = response;
+                    sendRequest.StatusCode = response.StatusCode;
+                }
+
+                return sendRequest;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"SendRequest: {e.Message}");
+                return null;
+            }
         }
 
         public static RestRequest SetRequestHeaders(ServiceRequest serviceRequest)

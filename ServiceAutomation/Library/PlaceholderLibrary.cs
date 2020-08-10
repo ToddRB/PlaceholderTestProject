@@ -24,5 +24,20 @@ namespace Common.Library
             var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
             return jsonResponse;
         }
+
+        public static PlaceholderPost PostPlaceholderRecord()
+        {
+            PlaceholderPost post = new PlaceholderPost();
+            {
+                post.UserId = 101;
+                post.Title = "Todds Post Title";
+                post.Body = "Todds Post Body";
+            }
+
+            var postMessageRequest = service.PostPlaceholder(post);
+            var postMessageResponse = RestServiceRunner.SendRequest(postMessageRequest);
+            var jsonResponse = DeserializeResponses.GetPlaceholderPostAsJson(postMessageResponse);
+            return jsonResponse;
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace Common.Api
             {
                 Url = $"{Service}/posts/{placeholderId}",
                 Method = Method.PUT,
-                Json = post.ToString()
+                Json = JsonConvert.SerializeObject(post)
             };
         }
 
@@ -52,6 +52,16 @@ namespace Common.Api
             {
                 Url = $"{Service}/posts/{placeholderId}",
                 Method = Method.DELETE
+            };
+        }
+
+        public ServiceRequest PatchPlaceholderById(PlaceholderPost post, int placeholderId)
+        {
+            return new ServiceRequest
+            {
+                Url = $"{Service}/posts/{placeholderId}",
+                Method = Method.PATCH,
+                Json = JsonConvert.SerializeObject(post)
             };
         }
     }

@@ -4,13 +4,17 @@
 	<CodeAnalysisRuleSet></CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="JsonDataFiles\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServiceAutomation\Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="JsonDataFiles\1Record.json">
+    <None Update="JsonDataFiles\1InvalidRecord.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="JsonDataFiles\1ValidRecord.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

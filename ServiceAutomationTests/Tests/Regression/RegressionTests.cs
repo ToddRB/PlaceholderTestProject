@@ -54,20 +54,17 @@ namespace Tests.Scripts.RegressionTests
 
         [TestCategory("Get")]
         [TestCategory("Negative")]
-        [Priority(1)]
+        [Priority(2)]
         [Description("Get the Placeholder by an invalid id")]
         [TestMethod]
         public void GetPlaceholderByIdNegativeTest()
         {
-            var response = PlaceholderLibrary.GetPlaceholderPostById(200); 
-            Assert.IsTrue(string.IsNullOrEmpty(response.Title), "Invalid response");
-            Assert.IsTrue(string.IsNullOrEmpty(response.Body), "Invalid response");
-            Assert.IsTrue(response.UserId == 0, "Invalid response");
-            Assert.IsTrue(response.Id == 0, "Invalid response");
+            var response = PlaceholderLibrary.GetPlaceholderPostByInvalidId(200);
+            Assert.IsTrue(response, "Response in a bool in this case, and the failed successfully");
         }
 
         [TestCategory("Fail")]
-        [Priority(2)]
+        [Priority(3)]
         [Description("Get the Placeholder by id and compare with file")]
         [TestMethod]
         public void GetPlaceholderByIdInvalidFileCompareTest()
@@ -76,7 +73,7 @@ namespace Tests.Scripts.RegressionTests
             var json = JsonReader.ReadJsonFromInputFile("1InvalidRecord.json");
             var placeholderJson = DeserializeResponses.GetPlaceholderPostAsJson(json);
 
-            Assert.IsTrue(response.Title == placeholderJson.Title, "I expect this to fail actually");
+            Assert.IsFalse(response.Title == placeholderJson.Title, "File does not match returned record");
         }
 
         [TestCategory("Get")]
@@ -90,7 +87,8 @@ namespace Tests.Scripts.RegressionTests
             var json = JsonReader.ReadJsonFromInputFile("1ValidRecord.json");
             var placeholderJson = DeserializeResponses.GetPlaceholderPostAsJson(json);
 
-            Assert.IsTrue(response.Title == placeholderJson.Title, "I expect this to fail actually");
+            Assert.IsTrue(response.Title == placeholderJson.Title, "Record compared against baseline file title");
+            Assert.IsTrue(response.Body == placeholderJson.Body, "Record compared against baseline file title");
         }
 
         [TestCategory("Post")]
@@ -105,6 +103,47 @@ namespace Tests.Scripts.RegressionTests
             Assert.IsTrue(response.Body == "Todds Post Body");
             Assert.IsTrue(response.UserId == 101);
             Assert.IsTrue(response.Id == 101);
+        }
+
+        [TestCategory("Put")]
+        [TestCategory("Positive")]
+        [Priority(1)]
+        [Description("Put a new Placeholder record")]
+        [TestMethod]
+        public void PutPlaceholderTest()
+        {
+            var response = PlaceholderLibrary.PutPlaceholderRecord(1);
+            Assert.IsTrue(response.Title == "Todds Put Title");
+            Assert.IsTrue(response.Body == "Todds Put Body");
+            Assert.IsTrue(response.UserId == 201);
+            Assert.IsTrue(response.Id == 1);
+        }
+
+        [TestCategory("Delete")]
+        [TestCategory("Positive")]
+        [Priority(1)]
+        [Description("Put a Placeholder record")]
+        [TestMethod]
+        public void DeletePlaceholderTest()
+        {
+            var response = PlaceholderLibrary.DeletePlaceholderRecord(1);
+            Assert.IsTrue(response, "Response in a bool in this case, and the delete call returned successfully");            
+        }
+
+        [TestCategory("Bug?")]
+        [TestCategory("Patch")]
+        [TestCategory("Positive")]
+        [Priority(1)]
+        [Description("Patch a new Placeholder record")]
+        [TestMethod]
+        public void PatchPlaceholderTest()
+        {
+            var response = PlaceholderLibrary.PatchPlaceholderRecord(1);
+            Assert.IsTrue(response.Title == "Todds Patch Title");
+            Assert.IsTrue(response.Body == "Todds Patch Body");
+            Assert.IsTrue(response.UserId == 1);
+            //Either a bug or I don't understand PATCH? I have to include ID in the json or it returns 0
+            Assert.IsTrue(response.Id == 1);
         }
     }
 }

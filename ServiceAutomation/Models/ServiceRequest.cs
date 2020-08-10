@@ -5,8 +5,6 @@ namespace Common.Models
 {
     public class ServiceRequest
     {
-        public string Service { get; set; }
-
         public string Url { get; set; }
 
         public string Json { get; set; }

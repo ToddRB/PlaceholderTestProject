@@ -65,5 +65,19 @@ namespace Tests.Scripts.RegressionTests
             Assert.IsTrue(response.UserId == 0, "Invalid response");
             Assert.IsTrue(response.Id == 0, "Invalid response");
         }
+
+        [TestCategory("Get")]
+        [TestCategory("Fail")]
+        [Priority(2)]
+        [Description("Get the Placeholder by id and compare with file")]
+        [TestMethod]
+        public void GetPlaceholderByIdFileCompareTest()
+        {
+            var response = PlaceholderLibrary.GetPlaceholderPostById(1);
+            var json = JsonReader.ReadJsonFromInputFile("1Record.json");
+            var placeholderJson = DeserializeResponses.GetPlaceholderPostAsJson(json);
+
+            Assert.IsTrue(response.Title == placeholderJson.Title, "I expect this to fail actually");
+        }
     }
 }

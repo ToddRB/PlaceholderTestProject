@@ -12,6 +12,12 @@ namespace Common.Library
             return result;
         }
 
+        public static PlaceholderPost GetPlaceholderPostAsJson(string json)
+        {
+            var result = JsonConvert.DeserializeObject<PlaceholderPost>(json);
+            return result;
+        }
+
         public static List<PlaceholderPost> GetPlaceholderPostListAsJson(Response response)
         {
             var result = JsonConvert.DeserializeObject<List<PlaceholderPost>>(response.RestResponse.Content);

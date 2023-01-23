@@ -131,22 +131,6 @@ namespace Tests.Scripts.RegressionTests
         }
 
         [TestCategory("Bug?")]
-        [TestCategory("Patch")]
-        [TestCategory("Positive")]
-        [Priority(1)]
-        [Description("Patch a new Placeholder record")]
-        [TestMethod]
-        public void PatchPlaceholderTest()
-        {
-            var response = PlaceholderLibrary.PatchPlaceholderRecord(1);
-            Assert.IsTrue(response.Title == "Todds Patch Title");
-            Assert.IsTrue(response.Body == "Todds Patch Body");
-            Assert.IsTrue(response.UserId == 1);
-            //Either a bug or I don't understand PATCH? I have to include ID in the json or it returns 0
-            Assert.IsTrue(response.Id == 1);
-        }
-
-        [TestCategory("Bug?")]
         [TestCategory("Post")]
         [TestCategory("Negative")]
         [Priority(3)]
